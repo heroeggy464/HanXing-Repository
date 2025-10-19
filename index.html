@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寒星的资源库</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --neutral-color: #ecf0f1;
+            --text-color: #333;
+            --light-text: #7f8c8d;
+            --border-color: #ddd;
+            --hover-color: #2980b9;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 左侧导航栏样式 */
+        .sidebar {
+            width: 22%;
+            background-color: white;
+            color: var(--text-color);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: var(--transition);
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            display: none;
+        }
+
+        .nav-menu {
+            padding: 20px 0;
+            flex-grow: 1;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: var(--secondary-color);
+            border-left-color: var(--primary-color);
+        }
+
+        /* 社交媒体文字链接样式 - 移到导航栏底部 */
+        .social-text-links {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .social-text-links a {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .social-text-links a:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        .social-links {
+            padding: 0 20px 20px;
+        }
+
+        .social-links h3 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--neutral-color);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* 右侧内容区域样式 */
+        .content {
+            width: 78%;
+            margin-left: 22%;
+            padding: 40px;
+            background-color: white;
+        }
+
+        .content-header {
+            margin-bottom: 40px;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .author-info {
+            color: var(--light-text);
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        /* 小标题字号调小 */
+        .section-title {
+            font-size: 1.5rem; /* 从1.8rem调小到1.5rem */
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* 下载链接样式 */
+        .download-link {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .download-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .download-link a:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 30px 0;
+        }
+
+        /* 响应式设计 */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                width: 250px;
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .content {
+                width: 100%;
+                margin-left: 0;
+                padding: 20px;
+                padding-top: 60px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            color: var(--light-text);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- 左侧导航栏 -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>网站导航</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#section1" class="nav-item active">第一部分</a>
+                <a href="#section2" class="nav-item">第二部分</a>
+                <a href="#section3" class="nav-item">第三部分</a>
+                <a href="#section4" class="nav-item">第四部分</a>
+                <a href="#section5" class="nav-item">第五部分</a>
+            </div>
+            
+            <!-- 社交媒体文字链接 - 移到导航栏最底部 -->
+            <div class="social-text-links">
+                <a href="https://www.douyin.com/user/MS4wLjABAAAA6W19rIp95N8KRKXt5BnKxieObtSAxEZLucKNTJvb-HM?from_tab_name=main" target="_blank">抖音</a>
+                <a href="https://space.bilibili.com/3493118680762975?spm_id_from=333.1007.0.0" target="_blank">B站</a>
+            </div>
+        </nav>
+
+        <!-- 右侧内容区域 -->
+        <main class="content">
+            <div class="content-header">
+                <h1 class="main-title">寒星的资源库</h1>
+                <p class="author-info">作者：heroeggy464</p>
+            </div>
+
+            <section id="section1" class="section">
+                <h2 class="section-title">MC教程1</h2>
+                <!-- 添加下载链接 -->
+                <div class="download-link">
+                    Littleskin：<a href="https://littleskin.cn" target="_blank">littleskin.cn</a><br>Xbox：<a href="https://xbox.com" target="_blank">xbox.com</a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="section2" class="section">
+                <h2 class="section-title">Null</h2>
+                <!-- 添加下载链接 -->
+                <div class="download-link">
+                    下载链接：<a href="https://example.com/frontend-tech.zip" target="_blank">https://example.com/frontend-tech.zip</a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="section3" class="section">
+                <h2 class="section-title">Null</h2>
+                <!-- 添加下载链接 -->
+                <div class="download-link">
+                    下载链接：<a href="https://example.com/backend-tech.zip" target="_blank">https://example.com/backend-tech.zip</a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="section4" class="section">
+                <h2 class="section-title">Null</h2>
+                <!-- 添加下载链接 -->
+                <div class="download-link">
+                    下载链接：<a href="https://example.com/project-management.zip" target="_blank">https://example.com/project-management.zip</a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section id="section5" class="section">
+                <h2 class="section-title">Null</h2>
+                <!-- 添加下载链接 -->
+                <div class="download-link">
+                    下载链接：<a href="https://example.com/industry-trends.zip" target="_blank">https://example.com/industry-trends.zip</a>
+                </div>
+            </section>
+
+            <footer>
+                作者: heroeggy464
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // 导航栏滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            const sections = document.querySelectorAll('.section');
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+
+            // 移动端菜单切换
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+            });
+
+            // 点击导航项后关闭移动端菜单
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                    }
+                });
+            });
+
+            // 滚动时高亮当前部分
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href').slice(1) === current) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            // 平滑滚动
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
