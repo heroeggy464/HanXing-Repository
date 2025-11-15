@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面未找到 - 404错误</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            color: #4a6cf7;
+            margin-bottom: 10px;
+            line-height: 1;
+            text-shadow: 3px 3px 0 rgba(74, 108, 247, 0.1);
+        }
+        
+        .error-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .error-message {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-box {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: #f8f9fa;
+        }
+        
+        .search-button {
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-button:hover {
+            background: #3a5ce5;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #4a6cf7;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3a5ce5;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(74, 108, 247, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #4a6cf7;
+            border: 2px solid #4a6cf7;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(74, 108, 247, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .animation-area {
+            position: relative;
+            height: 200px;
+            margin: 40px 0;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(74, 108, 247, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60px;
+            right: 15%;
+            animation-delay: 1s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            bottom: 30px;
+            left: 20%;
+            animation-delay: 2s;
+        }
+        
+        .floating-element:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 10px;
+            right: 10%;
+            animation-delay: 3s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        .lost-illustration {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .lost-illustration:before {
+            content: "?";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            color: #4a6cf7;
+            font-weight: 800;
+            opacity: 0.2;
+        }
+        
+        .lost-illustration .compass {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #4a6cf7;
+            animation: spin 10s linear infinite;
+        }
+        
+        .lost-illustration .compass:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #4a6cf7;
+            border-radius: 50%;
+        }
+        
+        .lost-illustration .compass:after {
+            content: "N";
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #4a6cf7;
+            font-weight: bold;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-title {
+                font-size: 24px;
+            }
+            
+            .error-message {
+                font-size: 16px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lost-illustration">
+            <div class="compass"></div>
+        </div>
+        
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">哎呀！页面走丢了</h2>
+        <p class="error-message">您要查找的页面可能已被移动、删除或暂时不可用。别担心，让我们帮您找到正确的方向。</p>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="搜索您需要的内容...">
+            <button class="search-button">搜索</button>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="https://github.com/heroeggy464/HanXing-Repository" class="btn btn-primary">仓库地址</a>
+            <a href="https://heroeggy464.github.io/HanXing-Repository/" class="btn btn-secondary">寒星的资源库</a>
+        </div>
+        
+        <div class="animation-area">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        
+        <div class="footer">
+            <p>如果您认为这是一个错误，请联系网站管理员 | 错误代码: 404</p>
+        </div>
+    </div>
+
+    <script>
+        // 简单的搜索功能
+        document.querySelector('.search-button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-input').value;
+            if(searchTerm.trim() !== '') {
+                alert(`搜索: ${searchTerm}\n（在实际应用中，这里会执行搜索功能）`);
+            }
+        });
+        
+        // 允许按Enter键进行搜索
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') {
+                document.querySelector('.search-button').click();
+            }
+        });
+    </script>
+</body>
+</html>
